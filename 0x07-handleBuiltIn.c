@@ -113,72 +113,17 @@ void handleCd(char **arguments, char **argv, int status, int errIndeX)
 
 	if (chdir(newDir) == 0)
 	{
-		setenv("PWD", cwdDir, 1);
-		setenv("OLDPWD", newDir, 1);
-		free1DArrayMemory(newDir);
-		free1DArrayMemory(cwdDir);
-		free2DArrayMemory(arguments);
-		return;
+		setenv("PWD", newDir, 1);
+		setenv("OLDPWD", cwdDir, 1);
 	}
 	else
 	{
-		handleError(argv[0], arguments[0], errIndeX);
+		handleCdError(argv[0], arguments[0], arguments[1], errIndeX);
+		free2DArrayMemory(arguments);
 		free1DArrayMemory(newDir);
-		free1DArrayMemory(cwdDir);
 		return;
 	}
-
 	free1DArrayMemory(newDir);
 	free1DArrayMemory(cwdDir);
 	free2DArrayMemory(arguments);
 }
-
-/**
- * void handleCd(char **arguments, char **argv, int status, int errIndeX)
-{
-
-	char *oldDir = NULL;
-	char *newDir = NULL;
-
-	(void)status;
-
-	if (arguments[1] == NULL)
-	{
-		newDir = getEnv("HOME");
-		if (newDir == NULL)
-		{
-			handleError(argv[0], arguments[0], errIndeX);
-			return;
-		}
-	}
-	else if (_strcmp(arguments[1], "-") == 0)
-	{
-		newDir = getEnv("OLDPWD");
-		if (newDir == NULL)
-		{
-			handleError(argv[0], arguments[0], errIndeX);
-			return;
-		}
-		write(STDOUT_FILENO, newDir, _strlen(newDir));
-	}
-
-	oldDir = getcwd(NULL, 0);
-
-	if (chdir(newDir) == 0)
-	{
-		setenv("PWD", oldDir, 1);
-		setenv("OLDPWD", oldDir, 1);
-	}
-
-	else
-	{
-		handleError(argv[0], arguments[0], errIndeX);
-		return;
-	}
-
-	free1DArrayMemory(newDir);
-	free1DArrayMemory(oldDir);
-	free2DArrayMemory(arguments);
-}
-
-*/

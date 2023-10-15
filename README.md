@@ -46,7 +46,7 @@ cp hsh /mnt/f/alx/simpleshell/automated_checker/automated_checker
 
 
 
-Example: 
+Example:
 Example: ./run ./hsh ./checker ./tests
 Example: ./run ./hsh ./checker ./tests/task
 Example: ./run ./hsh ./checker ./tests/task/test_case.bash
