@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * executeArgs - a function that excute user's input line
+ * executeCommand - a function that excute user's input line
  * @arguments: line tokens
  * @argv: arguments vector
  * @errIndex: error index number
