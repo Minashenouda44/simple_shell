@@ -29,19 +29,20 @@ char *readLine(void);
 char **splitLine(char *Line);
 char *getEnv(char *key);
 char *getFullPath(char *Command);
-int executeCommand(char **arguments, char **argv, int index);
-void handleError(char *progName, char *Command, int errindex);
 
 int checkBuiltIn(char **arguments);
 
-/* handle built in */
-
 void handleBuiltIn(char **arguments, char **argv, int status, int index);
+
 void handleExit(char **arguments, char **argv, int status, int index);
-
 void handleEnv(char **environ);
-
 void handleCd(char **arguments, char **argv, int status, int index);
+
+int executeCommand(char **arguments, char **argv, int index);
+
+void handleError(char *progName, char *Command, int errindex);
+void handleCdError(char *progName, char *CmdName, char *CmdArg, int errIndex);
+/* handle built in */
 
 /* features functions */
 
