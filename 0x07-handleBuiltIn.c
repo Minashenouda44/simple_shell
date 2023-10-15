@@ -35,7 +35,10 @@ void handleBuiltIn(char **arguments, char **argv, int status, int errIndeX)
 		handleExit(arguments, argv, status, errIndeX);
 
 	else if (_strcmp(arguments[0], "env") == 0)
+	{
+		free2DArrayMemory(arguments);
 		handleEnv(environ);
+	}
 
 	else if (_strcmp(arguments[0], "cd") == 0)
 		handleCd(arguments, argv, status, errIndeX);
