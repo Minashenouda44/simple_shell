@@ -17,6 +17,9 @@
 /* library 4 stat */
 #include <sys/stat.h>
 
+/* open file */
+#include <fcntl.h>
+
 /* delimeter */
 
 /* include global variables */
@@ -29,6 +32,8 @@ char *readLine(void);
 char **splitLine(char *Line);
 char *getEnv(char *key);
 char *getFullPath(char *Command);
+
+void handleFile(char **argv);
 
 int checkBuiltIn(char **arguments);
 
@@ -45,6 +50,8 @@ int executeCommand(char **arguments, char **argv, int index);
 
 void handleError(char *progName, char *Command, int errindex);
 void handleCdError(char *progName, char **arguments, int errIndex);
+void handleFileError(char *progName, char **arguments, int errIndex);
+
 /* handle built in */
 
 /* features functions */

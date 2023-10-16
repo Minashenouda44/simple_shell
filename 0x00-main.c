@@ -16,10 +16,14 @@ int main(int argc, char **argv)
 
 	int checkCommand = 0;
 
-	(void)argc;
-
 	while (1)
 	{
+		if (argc == 2)
+		{
+			handleFile(argv);
+			return (0);
+		}
+
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "$ ", 2);
 
@@ -44,4 +48,58 @@ int main(int argc, char **argv)
 		else
 			status = executeCommand(arguments, argv, errIndeX);
 	}
+}
+
+void handleFile(char **argv)
+{
+	int fd = 0;
+	ssize_t nread = 0;
+	char *line = NULL;
+	size_t nbyte = 256;
+	char **arguments = NULL;
+	int status = 0;
+	int errIndeX = 0;
+	int checkCommand = 0;
+
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+	{
+		handleFileError(argv[0], argv, errIndeX);
+		exit(127);
+	}
+
+	line = malloc(sizeof(char) * nbyte);
+	if (line == NULL)
+	{
+		handleFileError(argv[0], argv, errIndeX);
+		close(fd);
+		exit(127);
+	}
+
+	nread = read(fd, line, nbyte);
+	if (nread == -1)
+	{
+		free1DArrayMemory(line);
+		handleFileError(argv[0], argv, errIndeX);
+		free2DArrayMemory(arguments);
+		close(fd);
+		exit(127);
+	}
+
+	line[nread] = '\0';
+	arguments = splitLine(line);
+	if (arguments)
+	{
+		checkCommand = checkBuiltIn(arguments);
+
+		if (checkCommand == 1)
+			handleBuiltIn(arguments, argv, status, errIndeX);
+		else
+			status = executeCommand(arguments, argv, errIndeX);
+		free2DArrayMemory(arguments);
+	}
+	else
+		free1DArrayMemory(line);
+
+	close(fd);
 }
