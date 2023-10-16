@@ -41,7 +41,7 @@ void handleCd(char **arguments, char **argv, int status, int index);
 int executeCommand(char **arguments, char **argv, int index);
 
 void handleError(char *progName, char *Command, int errindex);
-void handleCdError(char *progName, char *CmdName, char *CmdArg, int errIndex);
+void handleCdError(char *progName, char **arguments, int errIndex);
 /* handle built in */
 
 /* features functions */

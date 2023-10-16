@@ -29,20 +29,20 @@ int executeCommand(char **arguments, char **argv, int errIndex)
 		if (execve(fullCommandPath, arguments, environ) == -1)
 		{
 			handleError(argv[0], arguments[0], errIndex);
-			free2DArrayMemory(arguments), free1DArrayMemory(fullCommandPath);
+			free1DArrayMemory(fullCommandPath), free2DArrayMemory(arguments);
 			return (127);
 		}
 	}
 	else if (exeFork == -1)
 	{
 		handleError(argv[0], arguments[0], errIndex);
-		free2DArrayMemory(arguments), free1DArrayMemory(fullCommandPath);
+		free1DArrayMemory(fullCommandPath), free2DArrayMemory(arguments);
 		return (127);
 	}
 	else
 	{
 		waitpid(exeFork, &status, 0);
-		free2DArrayMemory(arguments), free1DArrayMemory(fullCommandPath);
+		free1DArrayMemory(fullCommandPath), free2DArrayMemory(arguments);
 	}
 
 	return (WEXITSTATUS(status));

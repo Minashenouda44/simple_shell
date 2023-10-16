@@ -41,7 +41,9 @@ void handleBuiltIn(char **arguments, char **argv, int status, int errIndeX)
 	}
 
 	else if (_strcmp(arguments[0], "cd") == 0)
+	{
 		handleCd(arguments, argv, status, errIndeX);
+	}
 
 	else
 		handleError(argv[0], arguments[0], errIndeX);
@@ -117,13 +119,9 @@ void handleCd(char **arguments, char **argv, int status, int errIndeX)
 		setenv("OLDPWD", cwdDir, 1);
 	}
 	else
-	{
-		handleCdError(argv[0], arguments[0], arguments[1], errIndeX);
-		free2DArrayMemory(arguments);
-		free1DArrayMemory(newDir);
-		return;
-	}
-	free1DArrayMemory(newDir);
+		handleCdError(argv[0], arguments, errIndeX);
+
 	free1DArrayMemory(cwdDir);
+	free1DArrayMemory(newDir);
 	free2DArrayMemory(arguments);
 }

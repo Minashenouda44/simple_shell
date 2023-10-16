@@ -41,7 +41,7 @@ void handleError(char *progName, char *CommandName, int errIndex)
  * Return: void
  */
 
-void handleCdError(char *progName, char *CmdName, char *CmdArg, int errIndex)
+void handleCdError(char *progName, char **arguments, int errIndex)
 {
 	char *idx;
 	char message[] = "can't cd to ";
@@ -58,10 +58,10 @@ void handleCdError(char *progName, char *CmdName, char *CmdArg, int errIndex)
 	write(STDERR_FILENO, ": ", 2);
 	write(STDERR_FILENO, idx, _strlen(idx));
 	write(STDERR_FILENO, ": ", 2);
-	write(STDERR_FILENO, CmdName, _strlen(CmdName));
+	write(STDERR_FILENO, arguments[0], _strlen(arguments[0]));
 	write(STDERR_FILENO, ": ", 2);
 	write(STDERR_FILENO, message, _strlen(message));
-	write(STDERR_FILENO, CmdArg, _strlen(CmdArg));
+	write(STDERR_FILENO, arguments[1], _strlen(arguments[1]));
 	write(STDERR_FILENO, "\n", 1);
 
 	free1DArrayMemory(idx);

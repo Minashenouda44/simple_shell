@@ -28,6 +28,7 @@ char *getEnv(char *key)
 		}
 		free1DArrayMemory(tempEnviron);
 	}
+	free1DArrayMemory(envPathValue);
 
 	return (NULL);
 }

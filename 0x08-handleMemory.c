@@ -8,9 +8,10 @@
 
 void free1DArrayMemory(char *array)
 {
-	if (array)
+	if (array != NULL)
 	{
-		free(array), array = NULL;
+		free(array);
+		array = NULL;
 	}
 }
 
@@ -22,15 +23,16 @@ void free1DArrayMemory(char *array)
 
 void free2DArrayMemory(char **array)
 {
-	if (array)
+	if (array != NULL)
 	{
 		int i = 0;
 
 		for (i = 0; array[i]; i++)
 		{
-			free(array[i]), array[i] = NULL;
+			free(array[i]);
+			array[i] = NULL;
 		}
 
-		free(array), array = NULL;
+		free(array);
 	}
 }
