@@ -69,6 +69,16 @@ void handleFile(char **argv)
 	}
 
 	line = malloc(sizeof(char) * nbyte);
+
+	nread = read(fd, line, nbyte);
+	if (nread == -1)
+	{
+		free1DArrayMemory(line);
+		handleFileError(argv[0], argv, errIndeX);
+		exit(127);
+	}
+	close(fd);
+
 	if (line == NULL)
 	{
 		handleFileError(argv[0], argv, errIndeX);
@@ -76,17 +86,6 @@ void handleFile(char **argv)
 		exit(127);
 	}
 
-	nread = read(fd, line, nbyte);
-	if (nread == -1)
-	{
-		free1DArrayMemory(line);
-		handleFileError(argv[0], argv, errIndeX);
-		free2DArrayMemory(arguments);
-		close(fd);
-		exit(127);
-	}
-
-	line[nread] = '\0';
 	arguments = splitLine(line);
 	if (arguments)
 	{
@@ -96,10 +95,5 @@ void handleFile(char **argv)
 			handleBuiltIn(arguments, argv, status, errIndeX);
 		else
 			status = executeCommand(arguments, argv, errIndeX);
-		free2DArrayMemory(arguments);
 	}
-	else
-		free1DArrayMemory(line);
-
-	close(fd);
 }
