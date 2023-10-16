@@ -8,7 +8,7 @@
 int checkBuiltIn(char **arguments)
 {
 	unsigned int i = 0;
-	char *builtIn[] = {"exit", "env", "cd", NULL};
+	char *builtIn[] = {"exit", "env", "cd", "setenv", "unsetenv", NULL};
 
 	for (i = 0; builtIn[i]; i++)
 	{
@@ -41,9 +41,13 @@ void handleBuiltIn(char **arguments, char **argv, int status, int errIndeX)
 	}
 
 	else if (_strcmp(arguments[0], "cd") == 0)
-	{
 		handleCd(arguments, argv, status, errIndeX);
-	}
+
+	else if (_strcmp(arguments[0], "setenv") == 0)
+		handleSetEnv(arguments, argv, status, errIndeX);
+
+	else if (_strcmp(arguments[0], "unsetenv") == 0)
+		handleUnsetEnv(arguments, argv, status, errIndeX);
 
 	else
 		handleError(argv[0], arguments[0], errIndeX);

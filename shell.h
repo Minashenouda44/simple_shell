@@ -38,6 +38,9 @@ void handleExit(char **arguments, char **argv, int status, int index);
 void handleEnv(char **environ);
 void handleCd(char **arguments, char **argv, int status, int index);
 
+void handleSetEnv(char **arguments, char **argv, int status, int errIndeX);
+void handleUnsetEnv(char **arguments, char **argv, int status, int errIndeX);
+
 int executeCommand(char **arguments, char **argv, int index);
 
 void handleError(char *progName, char *Command, int errindex);
