@@ -132,7 +132,6 @@ void handleCd(char **arguments, char **argv, int *status, int errIndeX)
 			}
 		}
 		free1D(newDir);
-		free2D(arguments);
 		return;
 	}
 
