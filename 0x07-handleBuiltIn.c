@@ -36,7 +36,7 @@ void handleBuiltIn(char **arguments, char **argv, int status, int errIndeX)
 
 	else if (_strcmp(arguments[0], "env") == 0)
 	{
-		free2DArrayMemory(arguments);
+		free2D(arguments);
 		handleEnv(environ);
 	}
 
@@ -67,7 +67,7 @@ void handleExit(char **arguments, char **argv, int status, int errIndeX)
 	(void)argv;
 	(void)errIndeX;
 
-	free2DArrayMemory(arguments);
+	free2D(arguments);
 	exit(status);
 }
 
@@ -108,7 +108,7 @@ void handleCd(char **arguments, char **argv, int status, int errIndeX)
 	else
 		handleCdError(argv[0], arguments, errIndeX);
 
-	free1DArrayMemory(cwdDir);
-	free1DArrayMemory(newDir);
-	free2DArrayMemory(arguments);
+	free1D(cwdDir);
+	free1D(newDir);
+	free2D(arguments);
 }

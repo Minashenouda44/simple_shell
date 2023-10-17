@@ -56,8 +56,8 @@ void handleFileError(char *progName, char **arguments, int errIndex);
 
 /* features functions */
 
-void free1DArrayMemory(char *array);
-void free2DArrayMemory(char **array);
+void free1D(char *array);
+void free2D(char **array);
 
 /* string */
 

@@ -19,7 +19,7 @@ char *readLine()
 	nread = getline(&line, &len, stream);
 	if (nread == -1)
 	{
-		free1DArrayMemory(line);
+		free1D(line);
 		return (NULL);
 	}
 

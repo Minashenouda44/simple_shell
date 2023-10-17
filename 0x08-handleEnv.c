@@ -38,7 +38,7 @@ void handleSetEnv(char **arguments, char **argv, int status, int errIndeX)
     else
         handleError(argv[0], arguments[0], errIndeX);
 
-    free2DArrayMemory(arguments);
+    free2D(arguments);
 }
 
 /**
@@ -62,5 +62,5 @@ void handleUnsetEnv(char **arguments, char **argv, int status, int errIndeX)
     else
         handleError(argv[0], arguments[0], errIndeX);
 
-    free2DArrayMemory(arguments);
+    free2D(arguments);
 }

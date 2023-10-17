@@ -6,7 +6,7 @@
  * Return: void
  */
 
-void free1DArrayMemory(char *array)
+void free1D(char *array)
 {
 	if (array != NULL)
 	{
@@ -21,7 +21,7 @@ void free1DArrayMemory(char *array)
  * Return: void
  */
 
-void free2DArrayMemory(char **array)
+void free2D(char **array)
 {
 	if (array != NULL)
 	{
@@ -34,5 +34,6 @@ void free2DArrayMemory(char **array)
 		}
 
 		free(array);
+		array = NULL;
 	}
 }

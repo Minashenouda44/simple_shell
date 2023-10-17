@@ -73,7 +73,7 @@ void handleFile(char **argv)
 	nread = read(fd, line, nbyte);
 	if (nread == -1)
 	{
-		free1DArrayMemory(line);
+		free1D(line);
 		handleFileError(argv[0], argv, errIndeX);
 		exit(127);
 	}

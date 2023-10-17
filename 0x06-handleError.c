@@ -29,7 +29,7 @@ void handleError(char *progName, char *CommandName, int errIndex)
 	write(STDERR_FILENO, message, _strlen(message));
 	write(STDERR_FILENO, "\n", 1);
 
-	free1DArrayMemory(idx);
+	free1D(idx);
 }
 
 /**
@@ -64,7 +64,7 @@ void handleCdError(char *progName, char **arguments, int errIndex)
 	write(STDERR_FILENO, arguments[1], _strlen(arguments[1]));
 	write(STDERR_FILENO, "\n", 1);
 
-	free1DArrayMemory(idx);
+	free1D(idx);
 }
 
 /**
@@ -96,5 +96,5 @@ void handleFileError(char *progName, char **arguments, int errIndex)
 	write(STDERR_FILENO, arguments[1], _strlen(arguments[1]));
 	write(STDERR_FILENO, "\n", 1);
 
-	free1DArrayMemory(idx);
+	free1D(idx);
 }

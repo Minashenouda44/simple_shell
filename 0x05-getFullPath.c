@@ -27,7 +27,7 @@ char *getFullPath(char *Command)
 		fullCommandPath = malloc(sizeof(char) * 256);
 		if (fullCommandPath == NULL)
 		{
-			free1DArrayMemory(envPathValue);
+			free1D(envPathValue);
 			return (NULL);
 		}
 		_strcpy(fullCommandPath, path);
@@ -35,13 +35,13 @@ char *getFullPath(char *Command)
 		_strcat(fullCommandPath, Command);
 		if (stat(fullCommandPath, &st) == 0)
 		{
-			free1DArrayMemory(envPathValue);
+			free1D(envPathValue);
 			return (fullCommandPath);
 		}
-		free1DArrayMemory(fullCommandPath);
+		free1D(fullCommandPath);
 		path = strtok(NULL, ":");
 	}
 
-	free1DArrayMemory(envPathValue);
+	free1D(envPathValue);
 	return (NULL);
 }
