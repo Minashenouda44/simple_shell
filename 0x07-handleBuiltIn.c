@@ -8,7 +8,7 @@
 int checkBuiltIn(char **arguments)
 {
 	unsigned int i = 0;
-	char *builtIn[] = {"exit", "env", "cd", NULL};
+	char *builtIn[] = {"exit", "env", "cd", "setenv", "unsetenv", NULL};
 
 	for (i = 0; builtIn[i]; i++)
 	{
@@ -28,20 +28,23 @@ int checkBuiltIn(char **arguments)
  * Return: void
  */
 
-void handleBuiltIn(char **arguments, char **argv, int status, int errIndeX)
+void handleBuiltIn(char **arguments, char **argv, int *status, int errIndeX)
 {
 
 	if (_strcmp(arguments[0], "exit") == 0)
 		handleExit(arguments, argv, status, errIndeX);
 
 	else if (_strcmp(arguments[0], "env") == 0)
-	{
-		free2DArrayMemory(arguments);
-		handleEnv(environ);
-	}
+		handleEnv(arguments, argv, status, errIndeX);
 
 	else if (_strcmp(arguments[0], "cd") == 0)
 		handleCd(arguments, argv, status, errIndeX);
+
+	else if (_strcmp(arguments[0], "setenv") == 0)
+		handleSetEnv(arguments, argv, status, errIndeX);
+
+	else if (_strcmp(arguments[0], "unsetenv") == 0)
+		handleUnsetEnv(arguments, argv, status, errIndeX);
 
 	else
 		handleError(argv[0], arguments[0], errIndeX);
@@ -56,30 +59,25 @@ void handleBuiltIn(char **arguments, char **argv, int status, int errIndeX)
  * Return: void
  */
 
-void handleExit(char **arguments, char **argv, int status, int errIndeX)
+void handleExit(char **arguments, char **argv, int *status, int errIndeX)
 {
-	(void)argv;
-	(void)errIndeX;
+	int exitStatus = 0;
 
-	free2DArrayMemory(arguments);
-	exit(status);
-}
+	exitStatus = (*status);
 
-/**
- * handleEnv - a function that handle shell env command
- * @environ: environ
- * Return: void
- */
-
-void handleEnv(char **environ)
-{
-	unsigned int i = 0;
-
-	for (i = 0; environ[i]; i++)
+	if (arguments[1])
 	{
-		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
-		write(STDOUT_FILENO, "\n", 1);
+		if (isPositive(arguments[1]))
+			exitStatus = _atoi(arguments[1]);
+		else
+		{
+			handleExitError(argv[0], arguments, errIndeX);
+			free2D(arguments);
+			exit(2);
+		}
 	}
+	free2D(arguments);
+	exit(exitStatus);
 }
 
 /**
@@ -91,39 +89,44 @@ void handleEnv(char **environ)
  * Return: void
  */
 
-void handleCd(char **arguments, char **argv, int status, int errIndeX)
+void handleCd(char **arguments, char **argv, int *status, int errIndeX)
 {
 	char *cwdDir = NULL;
 	char *newDir = NULL;
 
 	(void)status;
-
 	if (arguments[1] == NULL)
 		newDir = getEnv("HOME");
 	else if (_strcmp(arguments[1], "-") == 0)
 	{
 		newDir = getEnv("OLDPWD");
-		write(STDOUT_FILENO, newDir, _strlen(newDir));
-		write(STDOUT_FILENO, "\n", 1);
+		if (newDir)
+		{
+			write(STDOUT_FILENO, newDir, _strlen(newDir));
+			write(STDOUT_FILENO, "\n", 1);
+		}
 	}
 	else
 		newDir = arguments[1];
 
-	cwdDir = getcwd(NULL, 0);
-
-	if (chdir(newDir) == 0)
+	if (newDir)
 	{
-		setenv("PWD", newDir, 1);
-		setenv("OLDPWD", cwdDir, 1);
+		cwdDir = getcwd(NULL, 0);
+		if (cwdDir)
+		{
+			if (chdir(newDir) == 0)
+			{
+				setenv("PWD", newDir, 1);
+				free1D(cwdDir), free1D(newDir), free2D(arguments);
+				return;
+			}
+			else
+			{
+				handleCdError(argv[0], arguments, errIndeX);
+				free2D(arguments), free1D(cwdDir);
+				return;
+			}
+		}
 	}
-	else
-	{
-		handleCdError(argv[0], arguments[0], arguments[1], errIndeX);
-		free2DArrayMemory(arguments);
-		free1DArrayMemory(newDir);
-		return;
-	}
-	free1DArrayMemory(newDir);
-	free1DArrayMemory(cwdDir);
-	free2DArrayMemory(arguments);
+	free1D(cwdDir), free2D(arguments);
 }

@@ -16,10 +16,14 @@ int main(int argc, char **argv)
 
 	int checkCommand = 0;
 
-	(void)argc;
-
 	while (1)
 	{
+		if (argc == 2)
+		{
+			handleFile(argv);
+			return (0);
+		}
+
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "$ ", 2);
 
@@ -40,7 +44,55 @@ int main(int argc, char **argv)
 		checkCommand = checkBuiltIn(arguments);
 
 		if (checkCommand == 1)
-			handleBuiltIn(arguments, argv, status, errIndeX);
+			handleBuiltIn(arguments, argv, &status, errIndeX);
+		else
+			status = executeCommand(arguments, argv, errIndeX);
+	}
+}
+
+/**
+ * handleFile - a function that handle a file as a command line argument
+ * @argv: argument vector
+ * Return: void
+ */
+
+void handleFile(char **argv)
+{
+	int fd = 0;
+	ssize_t nread = 0;
+	char *line = NULL;
+	size_t nbyte = 256;
+	char **arguments = NULL;
+	int status = 0;
+	int errIndeX = 0;
+	int checkCommand = 0;
+
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+	{
+		handleFileError(argv[0], argv, errIndeX);
+		exit(127);
+	}
+	line = malloc(sizeof(char) * nbyte);
+
+	nread = read(fd, line, nbyte);
+	if (nread == -1)
+	{
+		free1D(line);
+		handleFileError(argv[0], argv, errIndeX);
+		exit(127);
+	}
+	close(fd);
+
+	arguments = splitLine(line);
+	if (arguments == NULL)
+		exit(0);
+	else
+	{
+		checkCommand = checkBuiltIn(arguments);
+
+		if (checkCommand == 1)
+			handleBuiltIn(arguments, argv, &status, errIndeX);
 		else
 			status = executeCommand(arguments, argv, errIndeX);
 	}

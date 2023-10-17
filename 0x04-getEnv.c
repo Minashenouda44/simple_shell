@@ -23,11 +23,12 @@ char *getEnv(char *key)
 		{
 			varValue = strtok(NULL, "\n");
 			envPathValue = _strdup(varValue);
-			free1DArrayMemory(tempEnviron);
+			free1D(tempEnviron);
 			return (envPathValue);
 		}
-		free1DArrayMemory(tempEnviron);
+		free1D(tempEnviron);
 	}
+	free1D(envPathValue);
 
 	return (NULL);
 }

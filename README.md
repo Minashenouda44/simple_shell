@@ -37,9 +37,8 @@ write (man 2 write)
 
 gcc -g -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes
 
-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes
+valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./hsh
 
 
 cp hsh /mnt/f/alx/simpleshell/automated_checker/automated_checker

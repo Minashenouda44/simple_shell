@@ -20,19 +20,19 @@ char **splitLine(char *line)
 	tempLine = _strdup(line);
 	if (tempLine == NULL)
 	{
-		free1DArrayMemory(tempLine), free1DArrayMemory(line);
+		free1D(tempLine), free1D(line);
 		return (NULL);
 	}
 	token = strtok(tempLine, delim);
 	if (token == NULL)
 	{
-		free1DArrayMemory(tempLine), free1DArrayMemory(line);
+		free1D(tempLine), free1D(line);
 		return (NULL);
 	}
 	arguments = malloc(sizeof(char *) * 256);
 	if (arguments == NULL)
 	{
-		free1DArrayMemory(tempLine), free1DArrayMemory(line);
+		free1D(tempLine), free1D(line);
 		return (NULL);
 	}
 	while (token)
@@ -42,6 +42,6 @@ char **splitLine(char *line)
 	}
 	arguments[i] = NULL;
 
-	free1DArrayMemory(tempLine), free1DArrayMemory(line);
+	free1D(tempLine), free1D(line);
 	return (arguments);
 }
