@@ -6,9 +6,14 @@
  * Return: void
  */
 
-void handleEnv(char **environ)
+void handleEnv(char **arguments, char **argv, int *status, int errIndeX)
 {
     unsigned int i = 0;
+
+    (void)arguments;
+    (void)argv;
+    (void)status;
+    (void)errIndeX;
 
     for (i = 0; environ[i]; i++)
     {
@@ -26,7 +31,7 @@ void handleEnv(char **environ)
  * Return: void
  */
 
-void handleSetEnv(char **arguments, char **argv, int status, int errIndeX)
+void handleSetEnv(char **arguments, char **argv, int *status, int errIndeX)
 {
     (void)status;
 
@@ -50,7 +55,7 @@ void handleSetEnv(char **arguments, char **argv, int status, int errIndeX)
  * Return: void
  */
 
-void handleUnsetEnv(char **arguments, char **argv, int status, int errIndeX)
+void handleUnsetEnv(char **arguments, char **argv, int *status, int errIndeX)
 {
     (void)status;
 

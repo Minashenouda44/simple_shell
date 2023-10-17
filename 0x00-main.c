@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 		checkCommand = checkBuiltIn(arguments);
 
 		if (checkCommand == 1)
-			handleBuiltIn(arguments, argv, status, errIndeX);
+			handleBuiltIn(arguments, argv, &status, errIndeX);
 		else
 			status = executeCommand(arguments, argv, errIndeX);
 	}
@@ -92,7 +92,7 @@ void handleFile(char **argv)
 		checkCommand = checkBuiltIn(arguments);
 
 		if (checkCommand == 1)
-			handleBuiltIn(arguments, argv, status, errIndeX);
+			handleBuiltIn(arguments, argv, &status, errIndeX);
 		else
 			status = executeCommand(arguments, argv, errIndeX);
 	}

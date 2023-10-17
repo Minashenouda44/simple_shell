@@ -37,16 +37,16 @@ void handleFile(char **argv);
 
 int checkBuiltIn(char **arguments);
 
-void handleBuiltIn(char **arguments, char **argv, int status, int index);
+void handleBuiltIn(char **arguments, char **argv, int *status, int errIndeX);
 
-void handleExit(char **arguments, char **argv, int status, int index);
-void handleEnv(char **environ);
-void handleCd(char **arguments, char **argv, int status, int index);
+void handleExit(char **arguments, char **argv, int *status, int errIndeX);
+void handleEnv(char **arguments, char **argv, int *status, int errIndeX);
+void handleCd(char **arguments, char **argv, int *status, int errIndeX);
 
-void handleSetEnv(char **arguments, char **argv, int status, int errIndeX);
-void handleUnsetEnv(char **arguments, char **argv, int status, int errIndeX);
+void handleSetEnv(char **arguments, char **argv, int *status, int errIndeX);
+void handleUnsetEnv(char **arguments, char **argv, int *status, int errIndeX);
 
-int executeCommand(char **arguments, char **argv, int index);
+int executeCommand(char **arguments, char **argv, int errIndeX);
 
 void handleError(char *progName, char *Command, int errindex);
 void handleCdError(char *progName, char **arguments, int errIndex);

@@ -28,7 +28,7 @@ int checkBuiltIn(char **arguments)
  * Return: void
  */
 
-void handleBuiltIn(char **arguments, char **argv, int status, int errIndeX)
+void handleBuiltIn(char **arguments, char **argv, int *status, int errIndeX)
 {
 
 	if (_strcmp(arguments[0], "exit") == 0)
@@ -37,7 +37,7 @@ void handleBuiltIn(char **arguments, char **argv, int status, int errIndeX)
 	else if (_strcmp(arguments[0], "env") == 0)
 	{
 		free2D(arguments);
-		handleEnv(environ);
+		handleEnv(arguments, argv, status, errIndeX);
 	}
 
 	else if (_strcmp(arguments[0], "cd") == 0)
@@ -62,13 +62,13 @@ void handleBuiltIn(char **arguments, char **argv, int status, int errIndeX)
  * Return: void
  */
 
-void handleExit(char **arguments, char **argv, int status, int errIndeX)
+void handleExit(char **arguments, char **argv, int *status, int errIndeX)
 {
 	(void)argv;
 	(void)errIndeX;
 
 	free2D(arguments);
-	exit(status);
+	exit(*status);
 }
 
 /**
@@ -80,7 +80,7 @@ void handleExit(char **arguments, char **argv, int status, int errIndeX)
  * Return: void
  */
 
-void handleCd(char **arguments, char **argv, int status, int errIndeX)
+void handleCd(char **arguments, char **argv, int *status, int errIndeX)
 {
 	char *cwdDir = NULL;
 	char *newDir = NULL;
