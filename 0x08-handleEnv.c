@@ -20,6 +20,7 @@ void handleEnv(char **arguments, char **argv, int *status, int errIndeX)
         write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
         write(STDOUT_FILENO, "\n", 1);
     }
+    free2D(arguments);
 }
 
 /**
