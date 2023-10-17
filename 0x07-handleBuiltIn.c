@@ -95,7 +95,6 @@ void handleCd(char **arguments, char **argv, int *status, int errIndeX)
 	char *newDir = NULL;
 
 	(void)status;
-
 	if (arguments[1] == NULL)
 		newDir = getEnv("HOME");
 	else if (_strcmp(arguments[1], "-") == 0)
@@ -118,23 +117,16 @@ void handleCd(char **arguments, char **argv, int *status, int errIndeX)
 			if (chdir(newDir) == 0)
 			{
 				setenv("PWD", newDir, 1);
-				free1D(cwdDir);
-				free1D(newDir);
-				free2D(arguments);
+				free1D(cwdDir), free1D(newDir), free2D(arguments);
 				return;
 			}
 			else
 			{
 				handleCdError(argv[0], arguments, errIndeX);
-				free2D(arguments);
-				free1D(cwdDir);
+				free2D(arguments), free1D(cwdDir);
 				return;
 			}
 		}
-		free1D(newDir);
-		return;
 	}
-
-	free1D(cwdDir);
-	free2D(arguments);
+	free1D(cwdDir), free2D(arguments);
 }
