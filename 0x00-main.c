@@ -74,6 +74,7 @@ void handleFile(char **argv)
 		exit(127);
 	}
 	line = malloc(sizeof(char) * nbyte);
+
 	nread = read(fd, line, nbyte);
 	if (nread == -1)
 	{
@@ -82,14 +83,11 @@ void handleFile(char **argv)
 		exit(127);
 	}
 	close(fd);
-	if (line == NULL)
-	{
-		handleFileError(argv[0], argv, errIndeX);
-		close(fd);
-		exit(127);
-	}
+
 	arguments = splitLine(line);
-	if (arguments)
+	if (arguments == NULL)
+		exit(0);
+	else
 	{
 		checkCommand = checkBuiltIn(arguments);
 
