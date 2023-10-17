@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * free1DArrayMemory - a function that free 1D Array Memory
+ * free1D - a function that free 1D Array Memory
  * @array: 1D Array
  * Return: void
  */
@@ -16,7 +16,7 @@ void free1D(char *array)
 }
 
 /**
- * free2DArrayMemory - a function that free 2D Array Memory
+ * free2D - a function that free 2D Array Memory
  * @array: 2D Array
  * Return: void
  */

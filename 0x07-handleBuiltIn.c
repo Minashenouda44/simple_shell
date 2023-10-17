@@ -61,11 +61,23 @@ void handleBuiltIn(char **arguments, char **argv, int *status, int errIndeX)
 
 void handleExit(char **arguments, char **argv, int *status, int errIndeX)
 {
-	(void)argv;
-	(void)errIndeX;
+	int exitStatus = 0;
 
+	exitStatus = (*status);
+
+	if (arguments[1])
+	{
+		if (isPositive(arguments[1]))
+			exitStatus = _atoi(arguments[1]);
+		else
+		{
+			handleExitError(argv[0], arguments, errIndeX);
+			free2D(arguments);
+			exit(2);
+		}
+	}
 	free2D(arguments);
-	exit(*status);
+	exit(exitStatus);
 }
 
 /**

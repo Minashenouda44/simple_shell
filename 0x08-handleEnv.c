@@ -2,25 +2,28 @@
 
 /**
  * handleEnv - a function that handle shell env command
- * @environ: environ
+ * @arguments: arguments
+ * @argv: arguments vector
+ * @status: execution statues
+ * @errIndeX: error number
  * Return: void
  */
 
 void handleEnv(char **arguments, char **argv, int *status, int errIndeX)
 {
-    unsigned int i = 0;
+	unsigned int i = 0;
 
-    (void)arguments;
-    (void)argv;
-    (void)status;
-    (void)errIndeX;
+	(void)arguments;
+	(void)argv;
+	(void)status;
+	(void)errIndeX;
 
-    for (i = 0; environ[i]; i++)
-    {
-        write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
-        write(STDOUT_FILENO, "\n", 1);
-    }
-    free2D(arguments);
+	for (i = 0; environ[i]; i++)
+	{
+		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
+		write(STDOUT_FILENO, "\n", 1);
+	}
+	free2D(arguments);
 }
 
 /**
@@ -34,17 +37,17 @@ void handleEnv(char **arguments, char **argv, int *status, int errIndeX)
 
 void handleSetEnv(char **arguments, char **argv, int *status, int errIndeX)
 {
-    (void)status;
+	(void)status;
 
-    if (arguments[1] && arguments[2])
-    {
-        if (setenv(arguments[1], arguments[2], 1) != 0)
-            handleError(argv[0], arguments[0], errIndeX);
-    }
-    else
-        handleError(argv[0], arguments[0], errIndeX);
+	if (arguments[1] && arguments[2])
+	{
+		if (setenv(arguments[1], arguments[2], 1) != 0)
+			handleError(argv[0], arguments[0], errIndeX);
+	}
+	else
+		handleError(argv[0], arguments[0], errIndeX);
 
-    free2D(arguments);
+	free2D(arguments);
 }
 
 /**
@@ -58,15 +61,15 @@ void handleSetEnv(char **arguments, char **argv, int *status, int errIndeX)
 
 void handleUnsetEnv(char **arguments, char **argv, int *status, int errIndeX)
 {
-    (void)status;
+	(void)status;
 
-    if (arguments[1])
-    {
-        if (unsetenv(arguments[1]) != 0)
-            handleError(argv[0], arguments[0], errIndeX);
-    }
-    else
-        handleError(argv[0], arguments[0], errIndeX);
+	if (arguments[1])
+	{
+		if (unsetenv(arguments[1]) != 0)
+			handleError(argv[0], arguments[0], errIndeX);
+	}
+	else
+		handleError(argv[0], arguments[0], errIndeX);
 
-    free2D(arguments);
+	free2D(arguments);
 }

@@ -49,3 +49,45 @@ void _strrev(char *string, int len)
 		end--;
 	}
 }
+
+/**
+ * _atoi - a function that convert string to integer
+ * @str: string
+ * Return: integer
+ */
+
+int _atoi(char *str)
+{
+	int i = 0;
+	int number = 0;
+
+	for (i = 0; str[i]; i++)
+	{
+		number *= 10;
+		number += (str[i] - '0');
+	}
+
+	return (number);
+}
+
+/**
+ * isPositive - afunction that check if the number or not
+ * @str: string
+ * Return: 0 on success
+ */
+
+int isPositive(char *str)
+{
+	int i = 0;
+
+	if (str == NULL)
+		return (0);
+
+	for (i = 0; str[i]; i++)
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+	}
+
+	return (1);
+}

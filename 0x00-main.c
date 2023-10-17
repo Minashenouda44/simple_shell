@@ -50,6 +50,12 @@ int main(int argc, char **argv)
 	}
 }
 
+/**
+ * handleFile - a function that handle a file as a command line argument
+ * @argv: argument vector
+ * Return: void
+ */
+
 void handleFile(char **argv)
 {
 	int fd = 0;
@@ -67,9 +73,7 @@ void handleFile(char **argv)
 		handleFileError(argv[0], argv, errIndeX);
 		exit(127);
 	}
-
 	line = malloc(sizeof(char) * nbyte);
-
 	nread = read(fd, line, nbyte);
 	if (nread == -1)
 	{
@@ -78,14 +82,12 @@ void handleFile(char **argv)
 		exit(127);
 	}
 	close(fd);
-
 	if (line == NULL)
 	{
 		handleFileError(argv[0], argv, errIndeX);
 		close(fd);
 		exit(127);
 	}
-
 	arguments = splitLine(line);
 	if (arguments)
 	{
