@@ -108,7 +108,6 @@ void handleCd(char **arguments, char **argv, int *status, int errIndeX)
 	}
 	else
 		newDir = arguments[1];
-
 	if (newDir)
 	{
 		cwdDir = getcwd(NULL, 0);
@@ -127,6 +126,7 @@ void handleCd(char **arguments, char **argv, int *status, int errIndeX)
 				return;
 			}
 		}
+		free1D(newDir), free2D(arguments);
 	}
 	free1D(cwdDir), free2D(arguments);
 }
