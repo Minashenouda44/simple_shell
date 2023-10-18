@@ -24,7 +24,7 @@ char *getFullPath(char *Command)
 	path = strtok(envPathValue, ":");
 	while (path)
 	{
-		fullCommandPath = malloc(sizeof(char) * 256);
+		fullCommandPath = malloc(sizeof(char) * 1024);
 		if (fullCommandPath == NULL)
 		{
 			free1D(envPathValue);
