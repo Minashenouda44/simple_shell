@@ -73,7 +73,7 @@ void handleFile(char **argv)
 	if (fd == -1)
 	{
 		handleFileError(argv[0], argv, errIndeX);
-		exit(127);
+		return;
 	}
 	nbyte = sizeof(line);
 	_memset(line, 0, sizeof(line));
