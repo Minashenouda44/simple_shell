@@ -20,7 +20,7 @@ char **splitLine(char *line)
 	tempLine = _strdup(line);
 	if (tempLine == NULL)
 	{
-		free1D(tempLine), free1D(line);
+		free1D(line);
 		return (NULL);
 	}
 	token = strtok(tempLine, delim);

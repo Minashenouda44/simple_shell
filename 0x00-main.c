@@ -85,9 +85,7 @@ void handleFile(char **argv)
 	close(fd);
 
 	arguments = splitLine(line);
-	if (arguments == NULL)
-		exit(0);
-	else
+	if (arguments)
 	{
 		checkCommand = checkBuiltIn(arguments);
 
@@ -95,5 +93,9 @@ void handleFile(char **argv)
 			handleBuiltIn(arguments, argv, &status, errIndeX);
 		else
 			status = executeCommand(arguments, argv, errIndeX);
+	}
+	else
+	{
+		exit(0);
 	}
 }

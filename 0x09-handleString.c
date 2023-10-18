@@ -11,6 +11,9 @@ int _strlen(char *s)
 	int i = 0;
 	int len = 0;
 
+	if (s == NULL)
+		return (0);
+
 	while (s[i])
 	{
 		i++;
@@ -111,6 +114,8 @@ char *_strdup(char *str)
 		return (NULL);
 
 	len = _strlen(str);
+	if (len == 0)
+		return (NULL);
 
 	dup = malloc(sizeof(char) * (len + 1));
 	_memset(dup, 0, sizeof(char));
