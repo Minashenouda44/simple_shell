@@ -74,7 +74,7 @@ void handleFile(char **argv)
 		exit(127);
 	}
 	line = malloc(sizeof(char) * nbyte);
-
+	_memset(line, 0, sizeof(char));
 	nread = read(fd, line, nbyte);
 	if (nread == -1)
 	{

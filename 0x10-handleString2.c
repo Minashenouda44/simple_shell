@@ -91,3 +91,23 @@ int isPositive(char *str)
 
 	return (1);
 }
+
+/**
+ * _memset -  a function that fills memory with a constant byte.
+ * @s: array
+ * @c: constant
+ * @n: integer
+ * Return: s
+ */
+
+char *_memset(char *s, char c, unsigned int n)
+{
+	unsigned int i;
+
+	for (i = 0; i < n; i++)
+	{
+		s[i] = c;
+	}
+
+	return (s);
+}

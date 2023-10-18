@@ -67,6 +67,7 @@ int _strcmp(char *s1, char *s2);
 void _strrev(char *string, int len);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, const char *src);
+char *_memset(char *s, char b, unsigned int n);
 
 /* gcc -g -o hsh *.c shell.h */
 /* gdb ./hsh */

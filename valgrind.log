@@ -1,0 +1,26 @@
+==20201== Memcheck, a memory error detector
+==20201== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==20201== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==20201== Command: ./hsh test
+==20201== Parent PID: 19
+==20201== 
+==20201== Conditional jump or move depends on uninitialised value(s)
+==20201==    at 0x10A8E4: _strlen (0x09-handleString.c:17)
+==20201==    by 0x10AA97: _strdup (0x09-handleString.c:116)
+==20201==    by 0x109757: splitLine (0x02-splitLine.c:20)
+==20201==    by 0x10960F: handleFile (0x00-main.c:90)
+==20201==    by 0x1093E1: main (0x00-main.c:23)
+==20201==  Uninitialised value was created by a heap allocation
+==20201==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20201==    by 0x10957C: handleFile (0x00-main.c:76)
+==20201==    by 0x1093E1: main (0x00-main.c:23)
+==20201== 
+==20201== 
+==20201== HEAP SUMMARY:
+==20201==     in use at exit: 0 bytes in 0 blocks
+==20201==   total heap usage: 2 allocs, 2 frees, 1,025 bytes allocated
+==20201== 
+==20201== All heap blocks were freed -- no leaks are possible
+==20201== 
+==20201== For lists of detected and suppressed errors, rerun with: -s
+==20201== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
