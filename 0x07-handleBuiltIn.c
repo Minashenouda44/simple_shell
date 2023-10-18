@@ -116,17 +116,17 @@ void handleCd(char **arguments, char **argv, int *status, int errIndeX)
 			if (chdir(newDir) == 0)
 			{
 				setenv("PWD", newDir, 1);
-				free1D(cwdDir), free1D(newDir), free2D(arguments);
+				free1D(cwdDir);
+				free1D(newDir);
 				return;
 			}
 			else
 			{
 				handleCdError(argv[0], arguments, errIndeX);
-				free2D(arguments), free1D(cwdDir);
+				free1D(cwdDir);
 				return;
 			}
 		}
 		free1D(newDir);
 	}
-	free2D(arguments);
 }

@@ -13,37 +13,42 @@ int executeCommand(char **arguments, char **argv, int errIndex)
 	pid_t exeFork;
 	int status;
 	char *fullCommandPath = NULL;
+	int i = 0;
+
 	(void)argv;
 
-	fullCommandPath = getFullPath(arguments[0]);
-	if (fullCommandPath == NULL)
+	for (i = 0; arguments[i]; i++)
 	{
-		handleError(argv[0], arguments[0], errIndex);
-		free2D(arguments);
-		return (127);
-	}
 
-	exeFork = fork();
-	if (exeFork == 0)
-	{
-		if (execve(fullCommandPath, arguments, environ) == -1)
+		fullCommandPath = getFullPath(arguments[i]);
+		if (fullCommandPath == NULL)
 		{
-			handleError(argv[0], arguments[0], errIndex);
-			free1D(fullCommandPath), free2D(arguments);
+			handleError(argv[0], arguments[i], errIndex);
 			return (127);
 		}
-	}
-	else if (exeFork == -1)
-	{
-		handleError(argv[0], arguments[0], errIndex);
-		free1D(fullCommandPath), free2D(arguments);
-		return (127);
-	}
-	else
-	{
-		waitpid(exeFork, &status, 0);
-		free1D(fullCommandPath), free2D(arguments);
-	}
 
+		exeFork = fork();
+		if (exeFork == 0)
+		{
+			if (execve(fullCommandPath, arguments, environ) == -1)
+			{
+				handleError(argv[0], arguments[i], errIndex);
+				free1D(fullCommandPath);
+				return (127);
+			}
+		}
+		else if (exeFork == -1)
+		{
+			handleError(argv[0], arguments[i], errIndex);
+			free1D(fullCommandPath);
+			return (127);
+		}
+		else
+		{
+			waitpid(exeFork, &status, 0);
+			free1D(fullCommandPath);
+		}
+		return (WEXITSTATUS(status));
+	}
 	return (WEXITSTATUS(status));
 }

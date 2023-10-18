@@ -47,6 +47,8 @@ int main(int argc, char **argv)
 			handleBuiltIn(arguments, argv, &status, errIndeX);
 		else
 			status = executeCommand(arguments, argv, errIndeX);
+
+		free2D(arguments);
 	}
 }
 
@@ -94,7 +96,12 @@ void handleFile(char **argv)
 			status = executeCommand(arguments, argv, errIndeX);
 	}
 	else
+	{
+		free2D(arguments);
 		exit(0);
+	}
+
+	free2D(arguments);
 }
 
 /**

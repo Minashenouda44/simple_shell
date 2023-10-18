@@ -23,7 +23,6 @@ void handleEnv(char **arguments, char **argv, int *status, int errIndeX)
 		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
 		write(STDOUT_FILENO, "\n", 1);
 	}
-	free2D(arguments);
 }
 
 /**
@@ -46,8 +45,6 @@ void handleSetEnv(char **arguments, char **argv, int *status, int errIndeX)
 	}
 	else
 		handleError(argv[0], arguments[0], errIndeX);
-
-	free2D(arguments);
 }
 
 /**
@@ -70,6 +67,4 @@ void handleUnsetEnv(char **arguments, char **argv, int *status, int errIndeX)
 	}
 	else
 		handleError(argv[0], arguments[0], errIndeX);
-
-	free2D(arguments);
 }
