@@ -95,7 +95,5 @@ void handleFile(char **argv)
 			status = executeCommand(arguments, argv, errIndeX);
 	}
 	else
-	{
 		exit(0);
-	}
 }

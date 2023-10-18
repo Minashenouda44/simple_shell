@@ -121,10 +121,7 @@ char *_strdup(char *str)
 	_memset(dup, 0, sizeof(char));
 
 	if (dup == NULL)
-	{
-		free(dup);
 		return (NULL);
-	}
 
 	for (i = 0; i < len; i++)
 		dup[i] = str[i];
