@@ -67,13 +67,16 @@ void handleFile(char **argv)
 	int errIndeX = 0;
 	int checkCommand = 0;
 
+	line = malloc(sizeof(char) * nbyte);
+	if (line == -1)
+		return;
+
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 	{
 		handleFileError(argv[0], argv, errIndeX);
 		exit(127);
 	}
-	line = malloc(sizeof(char) * nbyte);
 
 	nread = read(fd, line, nbyte);
 	if (nread == -1)
