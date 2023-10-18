@@ -23,12 +23,10 @@ int main(int argc, char **argv)
 			handleFile(argv);
 			return (0);
 		}
-
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "$ ", 2);
 
 		inputline = readLine();
-
 		if (inputline == NULL)
 		{
 			if (isatty(STDIN_FILENO))
@@ -42,7 +40,6 @@ int main(int argc, char **argv)
 			continue;
 
 		checkCommand = checkBuiltIn(arguments);
-
 		if (checkCommand == 1)
 			handleBuiltIn(arguments, argv, &status, errIndeX);
 		else
@@ -61,13 +58,12 @@ int main(int argc, char **argv)
 void handleFile(char **argv)
 {
 	int fd = 0;
-	ssize_t nread = 0;
-	char line[1024];
-	size_t nbyte = 0;
-	char **arguments = NULL;
-	int status = 0;
 	int errIndeX = 0;
-	int checkCommand = 0;
+	int checkCommand = 0, status = 0;
+	char line[1024];
+	char **arguments = NULL;
+	size_t nbyte = 0;
+	ssize_t nread = 0;
 
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
@@ -84,7 +80,6 @@ void handleFile(char **argv)
 		exit(127);
 	}
 	close(fd);
-
 	arguments = splitFileLine(line);
 	if (arguments)
 	{
@@ -100,7 +95,6 @@ void handleFile(char **argv)
 		free2D(arguments);
 		exit(0);
 	}
-
 	free2D(arguments);
 }
 

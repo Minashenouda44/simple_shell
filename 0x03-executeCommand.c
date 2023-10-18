@@ -10,7 +10,7 @@
 
 int executeCommand(char **arguments, char **argv, int errIndex)
 {
-	pid_t exeFork;
+	pid_t child;
 	int status;
 	char *fullCommandPath = NULL;
 	int i = 0;
@@ -19,16 +19,14 @@ int executeCommand(char **arguments, char **argv, int errIndex)
 
 	for (i = 0; arguments[i]; i++)
 	{
-
 		fullCommandPath = getFullPath(arguments[i]);
 		if (fullCommandPath == NULL)
 		{
 			handleError(argv[0], arguments[i], errIndex);
 			return (127);
 		}
-
-		exeFork = fork();
-		if (exeFork == 0)
+		child = fork();
+		if (child == 0)
 		{
 			if (execve(fullCommandPath, arguments, environ) == -1)
 			{
@@ -37,7 +35,7 @@ int executeCommand(char **arguments, char **argv, int errIndex)
 				return (127);
 			}
 		}
-		else if (exeFork == -1)
+		else if (child == -1)
 		{
 			handleError(argv[0], arguments[i], errIndex);
 			free1D(fullCommandPath);
@@ -45,7 +43,7 @@ int executeCommand(char **arguments, char **argv, int errIndex)
 		}
 		else
 		{
-			waitpid(exeFork, &status, 0);
+			waitpid(child, &status, 0);
 			free1D(fullCommandPath);
 		}
 		return (WEXITSTATUS(status));

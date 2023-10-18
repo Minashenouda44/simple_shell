@@ -1,55 +1,53 @@
-simple shell
+simple shell 1.0
 
-List of allowed functions and system calls
-access (man 2 access)
-chdir (man 2 chdir)
-close (man 2 close)
-closedir (man 3 closedir)
-execve (man 2 execve)
-exit (man 3 exit)
-_exit (man 2 _exit)
-fflush (man 3 fflush)
-fork (man 2 fork)
-free (man 3 free)
-getcwd (man 3 getcwd)
-getline (man 3 getline)
-getpid (man 2 getpid)
-isatty (man 3 isatty)
-kill (man 2 kill)
-malloc (man 3 malloc)
-open (man 2 open)
-opendir (man 3 opendir)
-perror (man 3 perror)
-read (man 2 read)
-readdir (man 3 readdir)
-signal (man 2 signal)
-stat (__xstat) (man 2 stat)
-lstat (__lxstat) (man 2 lstat)
-fstat (__fxstat) (man 2 fstat)
-strtok (man 3 strtok)
-wait (man 2 wait)
-waitpid (man 2 waitpid)
-wait3 (man 2 wait3)
-wait4 (man 2 wait4)
-write (man 2 write)
+Description:
 
+Simple Shell 1.0 is a custom Unix-like shell that mimics the behavior of the standard sh shell.
 
+Usage:
 
-gcc -g -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
+To use the Simple Shell 1.0, execute the following command:
+./hsh [command line]
 
+Features:
 
-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./hsh
+Error Handling:
+Handles errors gracefully.
+File Inputs:
+Supports file inputs for running shell scripts.
+Command Line Arguments:
+Supports command lines with arguments.
+PATH Handling:
+Uses the PATH environment variable to locate executable binaries.
+Interactive Mode:
+Provides an interactive mode where commands are entered one by one.
+Non-Interactive Mode:
+Accepts command lines as arguments for non-interactive execution.
 
+Built-in Commands
+The Simple Shell 1.0 includes the following built-in commands:
 
-cp hsh /mnt/f/alx/simpleshell/automated_checker/automated_checker
+exit: Exit the shell.
+cd: Change the current working directory.
+env: Display the environment variables.
+setenv: Set or update environment variables.
+unsetenv: Remove environment variables.
 
+Limitations:
 
+Simple Shell 1.0 has some limitations, including:
 
-Example:
-Example: ./run ./hsh ./checker ./tests
-Example: ./run ./hsh ./checker ./tests/task
-Example: ./run ./hsh ./checker ./tests/task/test_case.bash
-Example: ./run ./hsh ./checker ./test_case1.bash ./tests/task2/
-Example: ./run ./hsh ./checker ./tests/task
-Example: ./run ./hsh ./checker ./tests/task/test_case.bash
-Example: ./run ./hsh ./checker ./test_case1.bash ./tests/task2/
+Does not support comments using #.
+Does not handle command separators (;).
+Does not include an alias built-in command.
+Does not support variable replacements using $? and $$.
+Does not implement shell logical operators && and ||.
+
+This function is still under development, and some features may not work properly.
+
+Contact:
+
+If you have any questions or encounter issues, feel free to contact the author 
+
+Mina Nady Shenouda
+minanadyshenouda@gmail.com
