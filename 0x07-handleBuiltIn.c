@@ -126,7 +126,7 @@ void handleCd(char **arguments, char **argv, int *status, int errIndeX)
 				return;
 			}
 		}
-		free1D(newDir), free2D(arguments);
+		free1D(newDir);
 	}
-	free1D(cwdDir), free2D(arguments);
+	free2D(arguments);
 }
