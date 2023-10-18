@@ -34,6 +34,8 @@ char *getEnv(char *key);
 char *getFullPath(char *Command);
 
 void handleFile(char **argv);
+char **splitFileLine(char *line);
+
 int executeCommand(char **arguments, char **argv, int errIndeX);
 
 int checkBuiltIn(char **arguments);

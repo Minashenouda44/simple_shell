@@ -60,8 +60,8 @@ void handleFile(char **argv)
 {
 	int fd = 0;
 	ssize_t nread = 0;
-	char *line = NULL;
-	size_t nbyte = 256;
+	char line[1024];
+	size_t nbyte = 0;
 	char **arguments = NULL;
 	int status = 0;
 	int errIndeX = 0;
@@ -73,18 +73,17 @@ void handleFile(char **argv)
 		handleFileError(argv[0], argv, errIndeX);
 		exit(127);
 	}
-	line = malloc(sizeof(char) * nbyte);
-	_memset(line, 0, sizeof(char));
+	nbyte = sizeof(line);
+	_memset(line, 0, sizeof(line));
 	nread = read(fd, line, nbyte);
 	if (nread == -1)
 	{
-		free1D(line);
 		handleFileError(argv[0], argv, errIndeX);
 		exit(127);
 	}
 	close(fd);
 
-	arguments = splitLine(line);
+	arguments = splitFileLine(line);
 	if (arguments)
 	{
 		checkCommand = checkBuiltIn(arguments);
@@ -96,4 +95,49 @@ void handleFile(char **argv)
 	}
 	else
 		exit(0);
+}
+
+/**
+ * splitFileLine - a function that split a line from a file into tokens
+ * @line: line
+ *
+ * Return: tokens on success
+ */
+
+char **splitFileLine(char *line)
+{
+	char *delim = " \t\n";
+	char *token = NULL, **arguments = NULL;
+	char *tempLine = NULL;
+	unsigned int i = 0;
+
+	if (line == NULL)
+		return (NULL);
+
+	tempLine = _strdup(line);
+	if (tempLine == NULL)
+	{
+		return (NULL);
+	}
+	token = strtok(tempLine, delim);
+	if (token == NULL)
+	{
+		free1D(tempLine);
+		return (NULL);
+	}
+	arguments = malloc(sizeof(char *) * 1024);
+	if (arguments == NULL)
+	{
+		free1D(tempLine);
+		return (NULL);
+	}
+	while (token)
+	{
+		arguments[i++] = _strdup(token);
+		token = strtok(NULL, delim);
+	}
+	arguments[i] = NULL;
+
+	free1D(tempLine);
+	return (arguments);
 }
