@@ -113,6 +113,8 @@ char *_strdup(char *str)
 	len = _strlen(str);
 
 	dup = malloc(sizeof(char) * (len + 1));
+	_memset(dup, 0, sizeof(char));
+
 	if (dup == NULL)
 	{
 		free(dup);
