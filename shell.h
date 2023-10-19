@@ -2,6 +2,7 @@
 #define SHELL_H
 
 /* compliation */
+
 /* gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh */
 
 #include <stdio.h>
@@ -33,10 +34,14 @@ char **splitLine(char *Line);
 char *getEnv(char *key);
 char *getFullPath(char *Command);
 
+/* handle file input */
+
 void handleFile(char **argv);
 char **splitFileLine(char *line);
 
 int executeCommand(char **arguments, char **argv, int errIndeX);
+
+/* handle built in */
 
 int checkBuiltIn(char **arguments);
 void handleBuiltIn(char **arguments, char **argv, int *status, int errIndeX);
@@ -47,11 +52,12 @@ void handleExit(char **arguments, char **argv, int *status, int errIndeX);
 void handleSetEnv(char **arguments, char **argv, int *status, int errIndeX);
 void handleUnsetEnv(char **arguments, char **argv, int *status, int errIndeX);
 
+/* handle errors */
+
 void handleError(char *progName, char *Command, int errindex);
 void handleCdError(char *progName, char **arguments, int errIndex);
 void handleFileError(char *progName, char **arguments, int errIndex);
 void handleExitError(char *progName, char **arguments, int errIndex);
-/* handle built in */
 
 /* features functions */
 
@@ -70,10 +76,5 @@ void _strrev(char *string, int len);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, const char *src);
 char *_memset(char *s, char b, unsigned int n);
-
-/* gcc -g -o hsh *.c shell.h */
-/* gdb ./hsh */
-
-/* cp hsh /mnt/f/alx/simpleshell/automated_checker/automated_checker */
 
 #endif
