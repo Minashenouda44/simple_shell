@@ -1,0 +1,52 @@
+simple shell
+
+Main Function Entry:
+
+The program's execution begins in the main function.
+It checks the number of command-line arguments (argc) and handles the case when a file is passed as an argument.
+Interactive and Non-Interactive Modes:
+
+The program determines whether it's in interactive or non-interactive mode.
+In interactive mode, it displays a command prompt (e.g., "$ ") and waits for user input.
+Reading User Input:
+
+In interactive mode, the readLine function is called to read user input from the standard input (stdin).
+The readLine function uses the getline function to read lines of input from the user.
+Tokenizing User Input:
+
+The user input is tokenized using the splitLine function. It splits the input into individual command arguments (tokens) based on spaces, tabs, and newlines.
+If the input line is empty, the program goes back to the prompt (in interactive mode).
+Handling Built-In Commands:
+
+The program checks if the entered command is a built-in command (e.g., "cd", "env", "setenv", "unsetenv", "exit").
+If the command is a built-in command, it is handled by functions such as handleCdError, handleEnv, handleSetEnv, and handleUnsetEnv.
+Executing External Commands:
+
+If the command is not a built-in command, the program attempts to execute an external command.
+It first checks if the command exists in the user's PATH environment variable by calling the getFullPath function.
+Forking and Executing External Commands:
+
+The program forks a new child process using the fork system call.
+In the child process, it calls execve to execute the external command.
+If execve fails, it handles the error using the handleError function.
+Waiting for Child Process:
+
+In the parent process, the program waits for the child process to complete using waitpid.
+It retrieves the exit status of the child process using WEXITSTATUS.
+Error Handling:
+
+Various functions like handleError, handleCdError, handleFileError, and handleExitError are used for error handling and displaying error messages.
+Environment Variable Handling:
+
+The shell provides built-in commands (env, setenv, unsetenv) for handling environment variables.
+The handleEnv, handleSetEnv, and handleUnsetEnv functions are responsible for executing these commands.
+String and Memory Utility Functions:
+
+Various utility functions (_strlen, _strcpy, _strcmp, _strcat, _strdup, _atoi, isPositive, _memset, int2str, _strrev) are used for string manipulation and memory management.
+Memory Cleanup:
+
+The free1D and free2D functions are used to free dynamically allocated memory for 1D and 2D arrays.
+Loop for Continuous Execution:
+
+The program runs in an infinite loop, continuously reading and processing user input until the user decides to exit the shell (e.g., by typing "exit" or pressing Ctrl+C).
+This shell is designed to mimic basic functionality similar to the sh shell. It can handle simple commands, environment variables, and basic error handling. It's important to note that this is a simplified shell for educational purposes and lacks many features and robustness found in fully-featured Unix-like shells.
