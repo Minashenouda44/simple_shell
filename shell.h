@@ -76,5 +76,6 @@ void _strrev(char *string, int len);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, const char *src);
 char *_memset(char *s, char b, unsigned int n);
+char *_strchr(char *s, char c);
 
 #endif
